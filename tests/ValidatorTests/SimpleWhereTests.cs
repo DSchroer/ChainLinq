@@ -15,14 +15,35 @@ namespace ChainLinq.Tests
         [Fact]
         public void ShouldCallback()
         {
-            var builder = new QueryBuilder();
+            var builder = new QueryBuilder<TestObj>();
 
-            builder.Add(new SimpleWhere<TestObj, int>(v => v.Value, value => {
+            int val = 0;
+            builder.Add(LinqMethods.Where(new Equals<TestObj, int>(v => v.Value, value => val = value)));
+            builder.Fallback(() => new List<TestObj>());
 
-            }));
+            var query = builder
+                .Build()
+                .Where(v => v.Value == 5)
+                .ToList();
 
-            var query = builder.Build(() => new List<TestObj>().AsQueryable())
-                .Where(v => v.Value == 5).ToList();
+            Assert.Equal(5, val);
+        }
+
+        [Fact]
+        public void ShouldReverse()
+        {
+            var builder = new QueryBuilder<TestObj>();
+
+            int val = 0;
+            builder.Add(LinqMethods.Where(new Equals<TestObj, int>(v => v.Value, value => val = value)));
+            builder.Fallback(() => new List<TestObj>());
+
+            var query = builder
+                .Build()
+                .Where(v => 5 == v.Value)
+                .ToList();
+
+            Assert.Equal(5, val);
         }
     }
 }

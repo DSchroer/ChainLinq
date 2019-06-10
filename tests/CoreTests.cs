@@ -12,22 +12,20 @@ public class CoreTests{
     [Fact]
     public void ShouldDefault(){
          var values = new List<int>{1,2,3,4,5,6,7,8,9,10};
-         var builder = new QueryBuilder();
+         var builder = new QueryBuilder<int>();
 
-         Assert.Equal(values, builder.Build(() => values.AsQueryable()));
+         Assert.Equal(values, builder.Fallback(() => values).Build());
     }
 
     [Fact]
     public void QueryReplacer(){
         var values = new List<int>{1,2,3,4,5,6,7,8,9,10};
-        var builder = new QueryBuilder();
+        var builder = new QueryBuilder<int>();
 
         int skip = 0;
-        builder.Add(new Skip(v => {
-            skip = v;
-        }));
+        builder.Add(LinqMethods.Skip(v => skip = v));
 
-        var query = builder.Build(() => new List<int>());
+        var query = builder.Fallback(() => values).Build();
         query.Skip(5).Where(t => true).ToList();
 
         Assert.Equal(5, skip);
@@ -36,13 +34,14 @@ public class CoreTests{
     [Fact]
     public void CanReact(){
         var values = new List<int>{1,2,3,4,5,6,7,8,9,10};
-        var builder = new QueryBuilder();
+        var builder = new QueryBuilder<int>();
 
-        builder.Add(new Skip(v => {
+        builder.Add(LinqMethods.Skip(s => {
             values = new List<int>();
         }));
+        builder.Fallback(() => values);
 
-        var query = builder.Build(() => new List<int>().AsQueryable()).Skip(5);
+        var query = builder.Build().Skip(5);
         Assert.Empty(query);
     }
 }

@@ -9,15 +9,18 @@ namespace ChainLinq.Core
     internal class VisitorProvider : QueryProvider, IExpressionHandler
     {
         private readonly IQueryProvider _fallback = new List<int>().AsQueryable().Provider;
-        public List<IExpressionVisitor> Visitors { get; }
-
-        public VisitorProvider(List<IExpressionVisitor> visitors)
-        {
-            Visitors = visitors;
-        }
+        public List<IExpressionVisitor> Visitors { get; } = new List<IExpressionVisitor>();
 
         public override object Execute(Expression expression)
         {
+            foreach (var visitor in Visitors)
+            {
+                if (visitor.Visit(ref expression))
+                {
+                    break;
+                }
+            }
+
             return _fallback.Execute(expression);
         }
 
@@ -25,7 +28,7 @@ namespace ChainLinq.Core
         {
             foreach (var visitor in Visitors)
             {
-                if (visitor.Visit(ref expression, this))
+                if (visitor.Visit(ref expression))
                 {
                     break;
                 }

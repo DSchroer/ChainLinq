@@ -4,6 +4,6 @@ using ChainLinq.Core;
 namespace ChainLinq.Visitors{
     public interface IExpressionVisitor
     {
-        bool Visit(ref Expression expression, IExpressionHandler provider);
+        bool Visit(ref Expression expression);
     }
 }
