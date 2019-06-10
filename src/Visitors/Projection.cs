@@ -2,7 +2,7 @@ using System;
 using System.Linq.Expressions;
 
 namespace ChainLinq.Visitors {
-    public class Projection<T> : Method
+    public class Projection<T> : Terminator
     {
         private readonly Func<T> _projection;
 

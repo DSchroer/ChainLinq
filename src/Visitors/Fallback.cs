@@ -14,7 +14,14 @@ namespace ChainLinq.Visitors
             Value = value;
         }
 
-        public bool Visit(ref Expression expression)
+        public bool Create(ref Expression expression)
+        {
+            Provider.Visitors.Clear();
+            expression = Value;
+            return true;
+        }
+
+        public bool Execute(ref Expression expression)
         {
             Provider.Visitors.Clear();
             expression = Value;

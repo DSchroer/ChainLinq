@@ -17,7 +17,7 @@ namespace ChainLinq.Visitors
         public override bool VisitMethod(ref MethodCallExpression expression)
         {
             var argument = expression.Arguments[1];
-            return _visitor.Visit(ref argument);
+            return _visitor.Create(ref argument);
         }
     }
 }

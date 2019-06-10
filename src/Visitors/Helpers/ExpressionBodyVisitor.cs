@@ -7,9 +7,17 @@ namespace ChainLinq.Visitors{
 
     public abstract class ExpressionBodyVisitor : IExpressionVisitor
     {
-        private readonly IExpressionVisitor _visitor;
+        public bool Create(ref Expression expression)
+        {
+            var unquoted = expression.StripQuotes();
+            if(unquoted is LambdaExpression lambda){
+                return Visit(lambda.Body);
+            }
 
-        public bool Visit(ref Expression expression)
+            return Visit(expression);
+        }
+
+        public bool Execute(ref Expression expression)
         {
             var unquoted = expression.StripQuotes();
             if(unquoted is LambdaExpression lambda){

@@ -15,7 +15,7 @@ namespace ChainLinq.Core
         {
             foreach (var visitor in Visitors)
             {
-                if (visitor.Visit(ref expression))
+                if (visitor.Execute(ref expression))
                 {
                     break;
                 }
@@ -28,7 +28,7 @@ namespace ChainLinq.Core
         {
             foreach (var visitor in Visitors)
             {
-                if (visitor.Visit(ref expression))
+                if (visitor.Create(ref expression))
                 {
                     break;
                 }
