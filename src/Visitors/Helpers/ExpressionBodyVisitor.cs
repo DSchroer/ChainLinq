@@ -5,7 +5,7 @@ using ChainLinq.Utils;
 
 namespace ChainLinq.Visitors{
 
-    public abstract class ExpressionBodyVisitor : IExpressionVisitor
+    public abstract class ExpressionBodyVisitor : ILinqNode
     {
         public bool Create(ref Expression expression)
         {

@@ -6,10 +6,10 @@ using ChainLinq.Visitors;
 
 namespace ChainLinq.Core
 {
-    internal class VisitorProvider : QueryProvider, IExpressionHandler
+    internal class ChainLinqProvider : QueryProvider
     {
         private readonly IQueryProvider _fallback = new List<int>().AsQueryable().Provider;
-        public List<IExpressionVisitor> Visitors { get; } = new List<IExpressionVisitor>();
+        public List<ILinqNode> Visitors { get; } = new List<ILinqNode>();
 
         public override object Execute(Expression expression)
         {

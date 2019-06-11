@@ -5,7 +5,7 @@ using ChainLinq.Utils;
 
 namespace ChainLinq.Visitors
 {
-    public abstract class Terminator : IExpressionVisitor
+    public abstract class Terminator : ILinqNode
     {
         private readonly Type _declaringType;
         private readonly string _methodName;

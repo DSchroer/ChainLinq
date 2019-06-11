@@ -10,10 +10,10 @@ namespace ChainLinq
 {
     public class QueryBuilder<T>
     {
-        private readonly List<IExpressionVisitor> _visitors = new List<IExpressionVisitor>();
+        private readonly List<ILinqNode> _visitors = new List<ILinqNode>();
         private Fallback _fallback;
 
-        public QueryBuilder<T> Add(IExpressionVisitor visitor)
+        public QueryBuilder<T> Add(ILinqNode visitor)
         {
             _visitors.Add(visitor);
             return this;
@@ -32,7 +32,7 @@ namespace ChainLinq
 
         public IQueryable<T> Build()
         {
-            var visitor = new VisitorProvider();
+            var visitor = new ChainLinqProvider();
 
             visitor.Visitors.AddRange(_visitors);
 

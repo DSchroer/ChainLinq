@@ -7,9 +7,9 @@ namespace ChainLinq.Visitors
 {
     public class ExpressionMethod : Method
     {
-        private readonly IExpressionVisitor _visitor;
+        private readonly ILinqNode _visitor;
 
-        public ExpressionMethod(IExpressionVisitor visitor, Type memberType, string methodName) : base(memberType, methodName)
+        public ExpressionMethod(ILinqNode visitor, Type memberType, string methodName) : base(memberType, methodName)
         {
             _visitor = visitor;
         }

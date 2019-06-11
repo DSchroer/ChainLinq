@@ -4,10 +4,10 @@ using ChainLinq.Core;
 
 namespace ChainLinq.Visitors
 {
-    internal class Fallback : IExpressionVisitor
+    internal class Fallback : ILinqNode
     {
         public Expression Value { get; }
-        public IExpressionHandler Provider { get; set; }
+        public ChainLinqProvider Provider { get; set; }
 
         public Fallback(Expression value)
         {
