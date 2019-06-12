@@ -15,8 +15,7 @@ namespace ChainLinq
         private readonly Behavior _behavior;
 
         public QueryBuilder() : this(new ThrowsException()) { }
-        public QueryBuilder(Func<IEnumerable<T>> value) : this(() => value().AsQueryable()) { }
-        public QueryBuilder(Func<IQueryable<T>> value) : this(new FallbackToValue(CallableFunc(value))) { }
+        public QueryBuilder(Func<IEnumerable<T>> value) : this(new FallbackToValue<T>(value)) { }
 
         public QueryBuilder(Behavior behavior)
         {
@@ -38,12 +37,6 @@ namespace ChainLinq
             visitor.Visitors.Add(_behavior);
 
             return new Query<T>(visitor);
-        }
-
-        private static Expression CallableFunc(Func<IQueryable<T>> core)
-        {
-            var methodInfo = typeof(Func<IQueryable<T>>).GetMethod(nameof(Func<IQueryable<T>>.Invoke));
-            return Expression.Call(Expression.Constant(core), methodInfo);
         }
     }
 }

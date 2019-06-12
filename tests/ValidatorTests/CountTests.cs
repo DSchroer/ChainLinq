@@ -16,12 +16,9 @@ namespace ChainLinq.Tests
         public void ShouldCount()
         {
             var builder = new QueryBuilder<TestObj>();
+            builder.Count(() => 42);
 
-            builder.Add(LinqMethods.Count(() => 42));
-
-            var count = builder.Build().Count();
-
-            Assert.Equal(42, count);
+            Assert.Equal(42, builder.Build().Count());
         }
 
         [Fact]
