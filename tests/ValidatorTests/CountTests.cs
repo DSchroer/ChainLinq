@@ -23,5 +23,13 @@ namespace ChainLinq.Tests
 
             Assert.Equal(42, count);
         }
+
+        [Fact]
+        public void ShouldGiveWrongCount(){
+            var builder = new QueryBuilder<int>(() => new List<int>(){1,2,3,4,5});
+
+            var query = builder.Build();
+            Assert.Equal(5, query.Count());
+        }
     }
 }

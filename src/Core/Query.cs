@@ -11,6 +11,11 @@ namespace ChainLinq.Core
         QueryProvider provider;
         Expression expression;
 
+        public Query(QueryProvider provider){
+            this.provider = provider;
+            this.expression = Expression.Constant(this);
+        }
+
         public Query(QueryProvider provider, Expression expression)
         {
             if (provider == null)

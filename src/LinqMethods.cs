@@ -20,8 +20,6 @@ namespace ChainLinq
         public static ILinqNode Skip(Action<int> handler) => new SkipOrTake(handler, typeof(Queryable), nameof(Queryable.Skip));
         public static ILinqNode Take(Action<int> handler) => new SkipOrTake(handler, typeof(Queryable), nameof(Queryable.Take));
 
-        public static ILinqNode Where(ILinqNode visitor) => new ExpressionMethod(visitor, typeof(Queryable), nameof(Queryable.Where));
-
         // Projections
         public static ILinqNode Count(Func<int> count) => new Projection<int>(count, typeof(Queryable), nameof(Queryable.Count));
 
