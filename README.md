@@ -10,7 +10,7 @@ The goals of the project are that it should be:
 
 ## Installation
 
-You can grab the latest build of ChainLinq from Nuget here:
+You can grab the latest build of ChainLinq from Nuget here: https://www.nuget.org/packages/Schroer.ChainLinq/
 
 ## Usage
 
