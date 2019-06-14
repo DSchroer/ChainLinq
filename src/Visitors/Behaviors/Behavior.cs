@@ -25,10 +25,10 @@ namespace ChainLinq.Visitors.Behaviors
             return true;
         }
 
-        protected abstract void OnUnknownCreate(ref Expression expression);
-        protected abstract void OnUnknownExecute(ref Expression expression);
+        public abstract void OnUnknownCreate(ref Expression expression);
+        public abstract void OnUnknownExecute(ref Expression expression);
 
-        protected void ClearNodes()
+        public void ClearNodes()
         {
             Provider.Visitors.Clear();
         }

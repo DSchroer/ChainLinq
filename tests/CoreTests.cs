@@ -35,7 +35,7 @@ public class CoreTests{
     public void CanReact(){
         var values = new List<int>{1,2,3,4,5,6,7,8,9,10};
         var builder = new QueryBuilder<int>(() => values);
-
+        
         builder.Skip(s => values = new List<int>());
 
         var query = builder.Build().Skip(5);
