@@ -44,6 +44,7 @@ var data = queryable.Skip(1).Take(10).ToList();
 
 #### Querying
 
+Querying can be done by matching the expression that is used. When a match is added then you will receive a callback.
 ```C#
 var data = new Dictionary<string, MyData>();
 
@@ -63,6 +64,21 @@ var queryable = builder.Build();
 
 // Will callback and set the key variable to "myId"
 var data = queryable.Where(d => d.Id == "myId").First();
+```
+
+#### Ordering
+
+There are two callbacks that can be used for ordering `OrderBy` and `ThenBy`. They will callback with information such as what property is being ordered and if it is in ascending or descending order.
+```C#
+var query = new QueryBuilder<MyData>.OrderBy(o => {
+    // The OrderInfo object has property information
+    if(o.PropertyName == "MyProperty"){ 
+        ...
+    }
+}).Build();
+
+// Trigger the callback using OrderBy or OrderByDescending
+query.OrderBy(v => v.MyProperty).ToList();
 ```
 
 ### Unknown Linq Nodes
@@ -97,7 +113,6 @@ var queryable = builder.Build();
 
 ## Roadmap
 
-* Add support for OrderBy and other property based Linq methods
 * Add support for First, FirstOrDefault and other terminating Linq methods
 * Add support for Select, SelectMany and other projecting methods
 * Integrating with other query providers like LinqToSQL

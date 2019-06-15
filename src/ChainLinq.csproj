@@ -5,7 +5,7 @@
     <PackageId>Schroer.ChainLinq</PackageId>
     <Title>ChainLinq</Title>
     <Description>ChainLinq is a library for connecting Linq IQueryables with other tools such as API' and libraries.</Description>
-    <Version>0.1.0</Version>
+    <Version>0.2.0</Version>
     <Authors>Dominick Schroer</Authors>
     <RepositoryUrl>https://github.com/DSchroer/ChainLinq</RepositoryUrl>
     <PackageTags>Linq;IQueryable;IQueryProvider</PackageTags>
